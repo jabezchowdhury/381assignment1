@@ -1,4 +1,5 @@
 /*styles.css*/
+
 header {
     display: flex;
     justify-content: space-between;
@@ -105,6 +106,10 @@ footer {
     opacity: 0.5;
 }
 
+.login-form fieldset {
+    border: none;
+}
+
 .login-form button:hover {
     background-color: #45A049;
     opacity: 1.0;
@@ -119,5 +124,4 @@ footer {
 .signup-link:hover {
     text-decoration: underline;
 }
-
 
