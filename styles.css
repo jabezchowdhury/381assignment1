@@ -1,5 +1,4 @@
 /*styles.css*/
-
 header {
     display: flex;
     justify-content: space-between;
@@ -123,5 +122,10 @@ footer {
 
 .signup-link:hover {
     text-decoration: underline;
+}
+
+.login-form button {
+    border: none;
+    color: #fff;
 }
 
