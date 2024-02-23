@@ -1,4 +1,14 @@
-/*styles.css*/
+/*
+==========================================
+Name: styles.css
+Assignment: Assignment 2
+Authors): Jabez Chowdhury, Alex Tong
+Submission: Feb 23, 2024
+Description: Styles page  for Assignment 2
+==========================================
+*/
+
+/* Home Page */
 header {
     display: flex;
     justify-content: space-between;
@@ -73,7 +83,7 @@ footer {
     text-align: center;
 }
 
-
+/* Login Page */
 .login-form {
     display: flex;
     flex-direction: column;
@@ -129,8 +139,7 @@ footer {
     color: #fff;
 }
 
-
-
+/* Products Page */
 .product-list table {
     width: 100%;
     border-collapse: collapse; 
@@ -187,6 +196,7 @@ button:hover {
     background-color: #45A049; 
 }
 
+/* Contacts Page */
 .contact-information {
     display: flex;
     flex-direction: column;
@@ -205,7 +215,7 @@ button:hover {
     border-radius: 10px;
 }
 
-.social-link a:hover {
+.social-links a:hover {
     color: #007BFF; 
 }
 
@@ -262,6 +272,3 @@ main {
 footer {
     flex-shrink: 0;
 }
-
-
-
