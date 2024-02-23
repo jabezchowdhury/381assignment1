@@ -153,6 +153,9 @@ footer {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 40px;
+    background-color: #ddd;
+    padding: 20px;
+    margin: 20px;
 }
 
 .product {
