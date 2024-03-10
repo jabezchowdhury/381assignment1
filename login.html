@@ -1,24 +1,27 @@
 <!--
 =========================================
-Name: contact.html
-Assignment: Assignment 2
-Authors): Jabez Chowdhury, Alex Tong
-Submission: Feb 23, 2024
-Description: Login page for Assignment 2
+Name: login.html
+Assignment: Assignment 3
+Authors): Jabez Chowdhury 30122363, Alex Tong 30132516
+Submission: Mar 10, 2024
+Description: Login page for Assignment 3
 =========================================
 -->
 
 <!-- login.html -->
+
 <!DOCTYPE html>
-<html lang="en"></html>
+<html lang="en">
+
 <head>
     <title>Bookstore</title>
-    <meta charset ="UTF-8">
+    <meta charset="UTF-8">
     <meta name="description" content="A online bookstore">
     <meta name="keywords" content="Book Store, Books, Textbooks, University, Student">
-    <meta name="author" content ="Jabez Chowdhury, Alex Tong">
+    <meta name="author" content="Jabez Chowdhury, Alex Tong">
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <header>
         <img src="images/logo.png" alt="Bookstore Logo" height="150">
@@ -27,27 +30,67 @@ Description: Login page for Assignment 2
     <div>
         <nav>
             <ul>
-            <li><a href="index.html">Home Page</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="login.html">Login</a></li>
+                <li><a href="index.html">Home Page</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="login.html">Login</a></li>
             </ul>
         </nav>
     </div>
     <main>
-        <form action="login.html" class="login-form">
+        <form action="login.html" class="login-form" id="login-form">
             <fieldset>
                 <label for="username">Username:</label><br>
                 <input type="text" id="username" name="username" placeholder="Enter your username"><br>
                 <label for="password">Password:</label><br>
                 <input type="password" id="password" name="password" placeholder="Enter your password"><br><br>
-                <button type="submit">Login</button>
+                <button type="submit" id="login-button">Login</button>
             </fieldset>
-        <p>New user? <a href="signup.html" class="signup-link">Sign up here</a>.</p>
+            <p>New user? <a href="signup.html" class="signup-link">Sign up here</a>.</p>
         </form>
+        <div id="message-box">
+            <p id="message"></p>
+        </div>
     </main>
     <footer>
         <p>&copy;2024 Bookstore</p>
     </footer>
+    <script>
+        document.getElementById('login-button').addEventListener('click', function (event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+
+            // Make sure username and password are not empty
+            if (username && password) {
+                fetch('https://jsonplaceholder.typicode.com/users')
+                    .then(response => response.json())
+                    .then(data => {
+                        var user = data.find(user => user.username === username && user.email === password);
+
+                        var messageBox = document.getElementById('message-box');
+                        var message = document.getElementById('message');
+
+                        if (user) {
+                            // If there is a match, display a success message
+                            message.textContent = 'Login successful!';
+                            messageBox.style.display = 'block';
+                        } else {
+                            // If there is no match, display an error message
+                            message.textContent = 'Invalid username or password.';
+                            messageBox.style.display = 'block';
+                        }
+                    })
+                    .catch(error => {
+                        // If there is an error in fetching data from the API endpoint, display an alert
+                        alert('Error in fetching data from the API endpoint');
+                    });
+            } else {
+                alert('Please enter your username and password');
+            }
+        });
+    </script>
 </body>
+
 </html>

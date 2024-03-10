@@ -1,0 +1,136 @@
+<!--
+=========================================
+Name: signup.html
+Assignment: Assignment 3
+Authors): Alex Tong 30132516, Jabez Chowdhury 30122363
+Submission: Mar 10, 2024
+Description: Signup page for Assignment 3
+=========================================
+-->
+
+<!-- signup.html -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Bookstore</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="A online bookstore">
+    <meta name="keywords" content="Book Store, Books, Textbooks, University, Student">
+    <meta name="author" content="Jabez Chowdhury, Alex Tong">
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <img src="images/logo.png" alt="Bookstore Logo" height="150">
+        <h1>Bookstore</h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home Page</a></li>
+            <li><a href="products.html">Products</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="login.html">Login</a></li>
+        </ul>
+    </nav>
+    <main>
+        <div class="signup-form-container">
+            <form id="signup-form">
+                <div class="input field">
+                    <label for="username">Username:</label>
+                    <input type="text" id="username" placeholder="Username" required><br>
+
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" placeholder="Password" required><br>
+
+                    <label for="confirm-password">Confirm Password:</label>
+                    <input type="password" id="confirm-password" placeholder="Confirm Password" required><br>
+
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" placeholder="Email" required><br>
+                </div>
+                <input type="submit" value="Signup">
+            </form>
+            <div id="message-box-container">
+                <div id="signup-message-box"></div>
+            </div>
+        </div>
+    </main>
+    <script>
+        // Select the form
+        var form = document.getElementById('signup-form');
+
+        // Add event listener to form
+        form.onsubmit = function (event) {
+            // Prevent form from submitting
+            event.preventDefault();
+
+            // Get form inputs
+            var username = document.getElementById('username').value;
+            var password = document.getElementById('password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+            var email = document.getElementById('email').value;
+
+            // Get the message box
+            var messageBox = document.getElementById('signup-message-box');
+
+            // Clear the message box
+            messageBox.innerHTML = '';
+
+            // Check if all inputs are filled
+            if (!username || !password || !confirmPassword || !email) {
+                var messageParagraph = document.createElement('p');
+                messageParagraph.textContent = 'Please fill all the fields correctly.';
+                messageBox.appendChild(messageParagraph);
+                return;
+            }
+
+            // Initialize an array to hold error messages
+            var errorMessages = [];
+
+            // Check if username is valid
+            var usernamePattern = /^[A-Za-z][A-Za-z0-9-_]{2,19}$/;
+            if (!usernamePattern.test(username)) {
+                errorMessages.push('Check the Username.');
+            }
+
+            // Check if password is valid
+            var passwordPattern = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&*()-_=+[\]{}|;:'\",.<>?/`~]).{8,}$/;
+            if (!passwordPattern.test(password)) {
+                errorMessages.push('Invalid password.');
+            }
+
+            // Check if passwords match
+            if (password !== confirmPassword) {
+                errorMessages.push("Password doesn't match.");
+            }
+
+            // Check if email is valid
+            var emailPattern = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+            if (!emailPattern.test(email)) {
+                errorMessages.push('Check the Email.');
+            }
+
+            // If there are any error messages, display them
+            if (errorMessages.length > 0) {
+                for (var i = 0; i < errorMessages.length; i++) {
+                    var messageParagraph = document.createElement('p');
+                    messageParagraph.textContent = errorMessages[i];
+                    messageBox.appendChild(messageParagraph);
+                }
+                return;
+            }
+
+            var messageParagraph = document.createElement('p');
+            messageParagraph.textContent = 'Signup successful!';
+            messageBox.appendChild(messageParagraph);
+        };
+    </script>
+    <footer>
+        <p>&copy; 2022 Bookstore</p>
+    </footer>
+</body>
+
+</html>
