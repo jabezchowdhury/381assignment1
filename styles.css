@@ -347,4 +347,25 @@ footer {
     opacity: 1;
 }
 
+/* Products Page */
+.cart-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.remove-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.remove-button:hover {
+    background-color: #ff0000;
+}
+
 /* End of CSS */

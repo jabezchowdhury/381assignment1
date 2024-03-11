@@ -20,7 +20,6 @@ Description: Products page for Assignment 3
     <meta name="keywords" content="Book Store, Books, Textbooks, University, Student">
     <meta name="author" content ="Alex Tong, Jabez Chowdhury">
     <link rel="stylesheet" href="styles.css">
-    <script src="products.js" async></script>
 </head>
 <body>
     <header>
@@ -43,32 +42,88 @@ Description: Products page for Assignment 3
                 <img src="images/react.png" alt="React Book" height="210">
                 <h3>The Road to<br>React</h3>
                 <p class="price">$29.99</p> 
-                <button class="add-to-cart">Add to Cart</button> 
+                <button class="add-to-cart" onclick="addToCart('The Road to React', 29.99)">Add to Cart</button>
             </div>
             <div class="product">
                 <img src="images/flask.png" alt="Flask Book" height="210" >
                 <h3>Flask Web<br>Development</h3>
                 <p class="price">$39.99</p> 
-                <button class="add-to-cart">Add to Cart</button> 
+                <button class="add-to-cart" onclick="addToCart('Flask Web Development', 39.99)">Add to Cart</button> 
             </div>
             <div class="product">
                 <img src="images/algorithms.png" alt="Algorithms Book" height="210">
                 <h3>Introduction to <br>Algorithms</h3>
                 <p class="price">$59.99</p> 
-                <button class="add-to-cart">Add to Cart</button> 
+                <button class="add-to-cart" onclick="addToCart('Introduction to Algorithms', 59.99)">Add to Cart</button> 
             </div>
             <div class="product">
                 <img src="images/digital.png" alt="Digital Design and Computer Architecture Book" height="210">
                 <h3>Digital Design and<br>Computer Architecture</h3>
                 <p class="price">$99.99</p> 
-                <button class="add-to-cart">Add to Cart</button>
+                <button class="add-to-cart" onclick="addToCart('Digital Design and Computer Architecture', 99.99)">Add to Cart</button> 
             </div>
         </section>
-        <section class="cart">
-            <h2>Cart</h2> 
-        <div class="cart-items"> </div>
-        </section>  
+        <section class="cart-list">
+            <h1>Shopping Cart</h1> 
+            <div id="cart"></div>
+        </section> 
     </main>
+    <script>
+        const cart = document.getElementById('cart')
+
+        function addToCart(product, price){
+            let cartItem = document.getElementById(product)
+            if (cartItem){
+                let quantityElement = cartItem.children[2];
+                let quantity = parseInt(quantityElement.textContent);
+                quantity++;
+                quantityElement.textContent = quantity;
+            }
+
+            else{
+                let newCartItem = document.createElement('div')
+                newCartItem.setAttribute('id', product);
+    
+                let productName = document.createElement('span');
+                productName.textContent = product + " - ";
+                newCartItem.appendChild(productName);
+    
+                let unitPrice = document.createElement('span');
+                unitPrice.textContent = '$'+ price + " - ";
+                newCartItem.appendChild(unitPrice);
+
+                let productQuantity = document.createElement('span');
+                productQuantity.textContent = '1';
+                productQuantity.classList.add('quantity');
+                newCartItem.appendChild(productQuantity);
+    
+                let removeButton = document.createElement('button');
+                removeButton.textContent = 'Remove';
+                removeButton.classList.add('remove-button');
+                removeButton.addEventListener('click', function(){
+                removeFromCart(product);
+                }  );
+                newCartItem.appendChild(removeButton);
+    
+                cart.appendChild(newCartItem);
+            }
+            alert (`${product} has been added to the cart.`);
+        }
+
+        function removeFromCart(product){
+            let cartItem = document.getElementById(product)
+            let quantityElement = cartItem.children[2];
+        let quantity = parseInt(quantityElement.textContent);
+            quantity--;
+            if (quantity === 0){
+                cartItem.remove()
+            }
+            else{
+            quantityElement.textContent = quantity;
+            }
+        }
+        
+    </script>
     <footer>
         <p>&copy;2024 Bookstore</p>
     </footer>
